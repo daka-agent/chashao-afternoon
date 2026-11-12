@@ -58,5 +58,44 @@
     <div id="error" hidden><h2>午后暂时缺席了</h2><p id="error-message"></p><button onclick="location.reload()">重新见面</button></div>
     <div id="gesture" aria-hidden="true"></div>
   </main>
+<style id="daka-card-sink">@media (width<=600px){.cat-card{transition:bottom .45s cubic-bezier(.22,.61,.36,1)}body.daka-sink .cat-card{bottom:calc(16px + env(safe-area-inset-bottom))!important}body.daka-sink #touch-hint{opacity:0!important;pointer-events:none!important}#touch-hint{transition:opacity .3s}}</style>
+<script id="daka-card-sink-js">
+/* 本站补丁。用 setInterval 而不是 MutationObserver：提示条的透明度是引擎每帧改的，
+   属性观察会被高频触发；400ms 轮询对这点开销可以忽略。 */
+(function () {
+  var hint = document.getElementById('touch-hint');
+  var load = document.querySelector('#loading');
+  var body = document.body;
+  var done = false, t0 = 0;
+
+  function go() {
+    if (done) return;              /* 锁死：绝不回弹 */
+    done = true;
+    body.classList.add('daka-sink');
+  }
+  function loadGone() {
+    if (!load) return document.readyState === 'complete';
+    if (load.classList && load.classList.contains('done')) return true;
+    var cs = window.getComputedStyle(load);
+    return cs.display === 'none' || cs.visibility === 'hidden' || parseFloat(cs.opacity) === 0;
+  }
+  function check() {
+    if (done) return;
+    /* 条件一：作者把提示条调暗了 = 玩家已经摸到猫 */
+    if (hint) {
+      var op = parseFloat(window.getComputedStyle(hint).opacity);
+      if (op < 0.9) { go(); return; }
+    }
+    /* 条件二：画面出来满 N 秒（没摸猫、只是看着，也不能一直挡住） */
+    if (loadGone()) {
+      if (!t0) t0 = Date.now();
+      else if (Date.now() - t0 >= 8 * 1000) go();
+    }
+  }
+  setInterval(check, 400);
+  document.addEventListener('visibilitychange', check);
+  check();
+})();
+</script>
 </body>
 </html>
