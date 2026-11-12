@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#eee8dc" />
+  <meta name="description" content="阳光落下来，叉烧在等你。一个无需登录的双端 3D 撸猫体验。" />
+  <title>叉烧的午后</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='.9em' font-size='55'%3E🐾%3C/text%3E%3C/svg%3E" />
+  <script type="module" crossorigin src="/assets/index-3zW4PEa3.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CZsGzBKK.css">
+</head>
+<body>
+  <main id="app">
+    <div id="scene" role="img" aria-label="一只猫咪在午后的软垫上等待抚摸"></div>
+    <header class="topbar">
+      <div class="identity"><span class="paw">🐾</span><div><h1>叉烧的午后</h1><p>阳光正好，它在等你</p><p class="byline">A game by Daka</p></div></div>
+      <div class="actions">
+        <button id="sound" class="icon" aria-label="静音" title="静音 / 开启声音 (M)">♫</button>
+        <button id="reset" class="icon" aria-label="重置镜头" title="回到初始视角 (R)">↺</button>
+        <button id="settings" class="icon" aria-label="画面与声音设置" title="画面与声音设置">☀</button>
+      </div>
+    </header>
+    <aside id="settings-panel" class="panel" hidden>
+      <div><strong>画面与声音</strong><button id="close-settings" class="plain" aria-label="关闭设置">×</button></div>
+      <label>画质 <select id="quality"><option value="auto">自动</option><option value="high">精细</option><option value="medium">均衡</option><option value="low">流畅</option></select></label>
+      <label class="voice-label">猫咪回应 <select id="voice-profile"><option value="natural">自然 · 偶尔轻颤音</option><option value="quiet">安静 · 仅呼噜</option></select></label>
+      <button id="preview-voice" class="voice-preview">▶&nbsp; 试听真实短颤音</button>
+      <p class="voice-help">像真实撸猫一样：多数时候不喵叫，以呼噜和肢体回应为主。选择会保存在本机。</p>
+      <label class="volume-label" for="cat-volume">猫音量 <output id="volume-value" for="cat-volume">70%</output></label>
+      <input id="cat-volume" type="range" min="0" max="100" step="1" value="70" aria-label="猫音量">
+      <hr>
+      <label class="check"><input id="debug-toggle" type="checkbox" /> 显示互动区域与性能</label>
+      <p>流畅档也会保留猫咪毛发与材质。</p>
+    </aside>
+    <div id="loading" class="loading"><div class="loading-card"><span class="loader-paw">🐾</span><h2>叉烧正在找一个舒服的位置</h2><div class="track"><i id="progress"></i></div><p id="load-label">准备午后的阳光…</p></div></div>
+    <section class="cat-card"><div class="cat-name"><span class="status-dot"></span><strong>叉烧</strong><span id="mood">放松地晒太阳</span></div><div class="affection"><span>你们的默契</span><span id="affection-value">初次见面</span></div><div class="bar"><i id="affection-bar"></i></div><p id="message" aria-live="polite">把手轻轻放到它的头上吧</p></section>
+    <div id="touch-hint"><span class="hand">☝</span><span>在猫咪身上轻轻滑动<br><small>空白处拖动看看它 · 双指或滚轮靠近</small></span></div>
+    <div id="debug" hidden></div>
+    <div id="toast" role="status"></div>
+    <div id="error" hidden><h2>午后暂时缺席了</h2><p id="error-message"></p><button onclick="location.reload()">重新见面</button></div>
+    <div id="gesture" aria-hidden="true"></div>
+  </main>
+</body>
+</html>
