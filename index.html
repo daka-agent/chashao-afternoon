@@ -7,34 +7,33 @@
   <meta name="description" content="阳光落下来，叉烧在等你。一个无需登录的双端 3D 撸猫体验。" />
   <title>叉烧的午后</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='.9em' font-size='55'%3E🐾%3C/text%3E%3C/svg%3E" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="叉烧的午后" />
-  <meta property="og:description" content="阳光落下来，叉烧在等你。一个无需登录的双端 3D 撸猫体验。" />
-  <meta property="og:url" content="https://dakazhang.com/works/chashao-afternoon/" />
-  <meta property="og:image" content="https://dakazhang.com/works/chashao-afternoon/og-cover.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <style>.cat-card .kin{color:#7a7264;margin:7px 0 0;font-size:10.5px;line-height:1.55}.cat-card .kin a{color:#8f5f33;border-bottom:1px solid #8f5f3373;padding:3px 0;text-decoration:none}.cat-card .kin .sep{color:#b0a495;padding:0 4px}</style>
-  <script type="module" crossorigin src="./assets/index-B-tgk2Ux.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-CZsGzBKK.css">
+  <script type="module" crossorigin src="./assets/index-BoeKOBTn.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BK0O015o.css">
 </head>
 <body>
   <main id="app">
-    <div id="scene" role="img" aria-label="一只猫咪在午后的软垫上等待抚摸"></div>
+    <div id="scene" role="img" aria-label="数字橘白猫叉烧在午后的软垫上等待你的陪伴"></div>
     <header class="topbar">
-      <div class="identity"><span class="paw">🐾</span><div><h1>叉烧的午后</h1><p>阳光正好，它在等你</p><p class="byline">A game by Daka</p></div></div>
+      <div class="identity"><span class="paw">🐾</span><div><h1>叉烧的午后</h1><p>云陪伴，不打扰。</p><p class="byline">A game by Daka</p></div></div>
       <div class="actions">
+        <button id="care" class="icon" aria-label="现实中的相遇：校园猫边界提示" aria-controls="care-panel" aria-expanded="false" title="现实中的相遇">♡</button>
         <button id="sound" class="icon" aria-label="静音" title="静音 / 开启声音 (M)">♫</button>
         <button id="reset" class="icon" aria-label="重置镜头" title="回到初始视角 (R)">↺</button>
         <button id="settings" class="icon" aria-label="画面与声音设置" title="画面与声音设置">☀</button>
       </div>
     </header>
+    <aside id="care-panel" class="panel care-panel" role="dialog" aria-labelledby="care-title" hidden>
+      <div><strong id="care-title">现实中的相遇</strong><button id="close-care" class="plain" aria-label="关闭现实中的相遇提示">×</button></div>
+      <p>这里是数字叉烧。现实中的校园流浪猫有自己的生活习惯和健康边界，请遵守学校及猫协的管理倡议：</p>
+      <ul><li>远观，不追逐、不拥抱、不主动抚摸。</li><li>发现猫咪受伤或状态异常，记录位置并联系学校猫协。</li><li>不自行抓抱或用药，把照顾交给有经验的人。</li></ul>
+      <p class="care-closing">喜欢它，也可以给它留一点距离。</p>
+    </aside>
     <aside id="settings-panel" class="panel" hidden>
       <div><strong>画面与声音</strong><button id="close-settings" class="plain" aria-label="关闭设置">×</button></div>
       <label>画质 <select id="quality"><option value="auto">自动</option><option value="high">精细</option><option value="medium">均衡</option><option value="low">流畅</option></select></label>
       <label class="voice-label">猫咪回应 <select id="voice-profile"><option value="natural">自然 · 偶尔轻颤音</option><option value="quiet">安静 · 仅呼噜</option></select></label>
       <button id="preview-voice" class="voice-preview">▶&nbsp; 试听真实短颤音</button>
-      <p class="voice-help">像真实撸猫一样：多数时候不喵叫，以呼噜和肢体回应为主。选择会保存在本机。</p>
+      <p class="voice-help">数字叉烧多数时候不喵叫，以呼噜和肢体回应为主。选择会保存在本机。</p>
       <label class="volume-label" for="cat-volume">猫音量 <output id="volume-value" for="cat-volume">70%</output></label>
       <input id="cat-volume" type="range" min="0" max="100" step="1" value="70" aria-label="猫音量">
       <hr>
@@ -42,7 +41,7 @@
       <p>流畅档也会保留猫咪毛发与材质。</p>
     </aside>
     <div id="loading" class="loading"><div class="loading-card"><span class="loader-paw">🐾</span><h2>叉烧正在找一个舒服的位置</h2><div class="track"><i id="progress"></i></div><p id="load-label">准备午后的阳光…</p></div></div>
-    <section class="cat-card"><div class="cat-name"><span class="status-dot"></span><strong>叉烧</strong><span id="mood">放松地晒太阳</span></div><div class="affection"><span>你们的默契</span><span id="affection-value">初次见面</span></div><div class="bar"><i id="affection-bar"></i></div><p id="message" aria-live="polite">把手轻轻放到它的头上吧</p><p class="kin">有的猫有名字，有的没有。<a href="https://dakazhang.com/works/campus-cat-diary/">校猫日记</a><span class="sep">·</span><a href="https://dakazhang.com/works/duokanyiyan/">多看一眼</a></p></section>
+    <section class="cat-card"><div class="cat-name"><span class="status-dot"></span><strong>叉烧</strong><span id="mood">放松地晒太阳</span></div><div class="affection"><span>默契 · 安静陪伴也算</span><span id="affection-value">初次见面</span></div><div class="bar"><i id="affection-bar"></i></div><p id="message" aria-live="polite">轻轻抚摸，或安静陪它晒晒太阳</p><p class="digital-note">数字体验 · 现实校园猫请远观，不追、不抱、不主动抚摸</p></section>
     <div id="touch-hint"><span class="hand">☝</span><span>在猫咪身上轻轻滑动<br><small>空白处拖动看看它 · 双指或滚轮靠近</small></span></div>
     <div id="debug" hidden></div>
     <div id="toast" role="status"></div>
